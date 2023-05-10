@@ -1,0 +1,84 @@
+.roundimage {
+    margin-top:100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.BackgroundDarkGradient {
+    background-image: linear-gradient(#290a54, #790979, #ff00f5);
+    background-attachment: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    text-align:center;
+}
+
+p b {
+    font-size: 40px;
+    color: #f1d4ff;
+    font-family:'Courier New';
+    text-shadow: #c654ff 1px 0 10px, 0 0 0.9em pink;
+}
+
+p {
+    font-size: 25px;
+    color: #f1d4ff;
+    font-family: 'Courier New';
+    text-shadow: #c654ff 1px 0 10px, 0 0 0.9em pink;
+}
+
+
+
+.WhiteStandartTextColor 
+{
+    color: white;
+    text-shadow: 1px, 1px, 2px black;
+    font-size:20px;
+}
+
+.ButtonScaleSignUp {
+    width: 400px;
+    height: 70px;
+    background-image: linear-gradient(90deg, rgba(10,84,50,1) 0%, rgba(78,9,121,1) 44%, rgba(0,168,255,1) 100%);
+    text-align: center;
+    place-content: center;
+    font-size: 25px;
+    letter-spacing: 5px;
+    line-height: 70px;
+    box-sizing: border-box;
+}
+
+.ButtonScaleReg {
+    width: 400px;
+    height: 70px;
+    background-image: linear-gradient(90deg, rgba(78,10,84,1) 0%, rgba(121,9,56,1) 44%, rgba(255,0,0,1) 100%);
+    text-align: center;
+    place-content: center;
+    font-size: 25px;
+    letter-spacing: 5px;
+    line-height: 70px;
+    box-sizing: border-box;
+}
+
+.StatusOfRegistrationTrue {
+    color: #3ebd5c;
+    font-size: 60px;
+    font-family: Impact;
+    text-align: center;
+    text-shadow: #000000;
+}
+
+.StatusOfRegistrationFalse {
+    color: #bd3e3e;
+    font-size: 60px;
+    font-family: Impact;
+    text-align: center;
+    text-shadow: #000000;
+}
+
+#fileLoader {
+    visibility: collapse;
+    display: none;
+}
