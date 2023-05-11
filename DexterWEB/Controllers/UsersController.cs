@@ -29,7 +29,9 @@ namespace DexterWEB.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : Controller
+
     {
+        public bool stat;
         [HttpPost("[action]")]
         public IActionResult UploadAvatar([FromForm] IFormFile file)
         {
@@ -45,18 +47,42 @@ namespace DexterWEB.Controllers
                 ViewBag.Image = imageData;
                 return View("~/Views/Home/RegistrationWindow.cshtml", model: file);
             }
-            return View("~/Views/Home/RegistrationWindow.cshtml");
+            else
+            {
+                ViewBag.Image = System.IO.File.ReadAllBytes(@"~\other\images\StandartProfile");
+                return View("~/Views/Home/RegistrationWindow.cshtml");
+            }
         }
         [HttpPost("[action]")]
         public async Task<ActionResult> CreateUser([FromForm] UsersViewModel uvm)
         {
             using (DexterContext db = new DexterContext())
             {
+                if(ViewBag.Image == null)
+                {
+                   
+                    byte[] array = System.IO.File.ReadAllBytes("C:\\Users\\Владелец\\source\\repos\\DexterWEB\\DexterWEB\\wwwroot\\other\\images\\StandartProfile.png");
+                    ViewBag.Image = array;
+                }
+                try
+                {
                     User person = new User(uvm.Login, uvm.Password, uvm.Email, ViewBag.Image);
                     db.Users.Add(person);
+                    this.stat = true;
                     await db.SaveChangesAsync();
                     return View("~/Views/Home/RegistrationWindow.cshtml");
+                }
+                catch(DbUpdateException ex)
+                {
+                    this.Page.ClientScript.RegisterStartupScript(this.GetType())
+                }
             }
+        }
+        [HttpGet]
+        public async Task<ActionResult> Status()
+        {
+            if (this.stat) return Ok();
+            else return BadRequest();
         }
     }
 }
