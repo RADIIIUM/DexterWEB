@@ -78,7 +78,31 @@ p {
     text-shadow: #000000;
 }
 
+.ErrorSpan {
+    text-align: left;
+    font-size:16px;
+    color: red;
+}
+
 #fileLoader {
-    visibility: collapse;
-    display: none;
+    text-align: center;
+    place-content: center;
+    display: block;
+}
+#autorizform {
+    text-align:center;
+    place-content:center;
+    display:block;
+}
+#avatarSubmit {
+    width: 400px;
+    height: 70px;
+    background-image: linear-gradient(90deg, rgba(10,84,50,1) 0%, rgba(78,9,121,1) 44%, rgba(0,168,255,1) 100%);
+    color: white;
+    text-align: center;
+    place-content: center;
+    font-size: 25px;
+    letter-spacing: 5px;
+    line-height: 70px;
+    box-sizing: border-box;
 }

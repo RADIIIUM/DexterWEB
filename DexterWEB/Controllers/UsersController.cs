@@ -29,10 +29,28 @@ namespace DexterWEB.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : Controller
-
     {
-        public bool stat;
-        [HttpPost("[action]")]
+        public byte[] avatar;
+        [HttpPost("createuser")]
+        public async Task<ActionResult<User>> CreateUser(UsersViewModel uv)
+        {
+            using (DexterContext db = new DexterContext())
+            {
+                if (uv == null)
+                {
+                    return BadRequest();
+                }
+                if (this.avatar == null)
+                {
+                    this.avatar = System.IO.File.ReadAllBytes(@"C:\Users\Владелец\source\repos\DexterWEB\DexterWEB\wwwroot\other\images\StandartProfile.png");
+                }
+                User person = new User(uv.Login, uv.Password, uv.Email, this.avatar);
+                db.Users.Add(person);
+                await db.SaveChangesAsync();
+                return Ok(person);
+            }
+        }
+        [HttpPost("unloadavatar")]
         public IActionResult UploadAvatar([FromForm] IFormFile file)
         {
             if (file != null)
@@ -44,45 +62,34 @@ namespace DexterWEB.Controllers
                     imageData = binaryReader.ReadBytes(Convert.ToInt32(file.Length));
                 }
                 // установка массива байтов
-                ViewBag.Image = imageData;
-                return View("~/Views/Home/RegistrationWindow.cshtml", model: file);
+                avatar = imageData;
+                return View("~/Views/Home/RegistrationWindow", model: file);
             }
-            else
-            {
-                ViewBag.Image = System.IO.File.ReadAllBytes(@"~\other\images\StandartProfile");
-                return View("~/Views/Home/RegistrationWindow.cshtml");
-            }
+            return View("~/Views/Home/RegistrationWindow");
         }
-        [HttpPost("[action]")]
-        public async Task<ActionResult> CreateUser([FromForm] UsersViewModel uvm)
+        [HttpGet("{Login}")]
+        public async Task<ActionResult> GetUser(string Login)
         {
             using (DexterContext db = new DexterContext())
             {
-                if(ViewBag.Image == null)
-                {
-                   
-                    byte[] array = System.IO.File.ReadAllBytes("C:\\Users\\Владелец\\source\\repos\\DexterWEB\\DexterWEB\\wwwroot\\other\\images\\StandartProfile.png");
-                    ViewBag.Image = array;
-                }
                 try
                 {
-                    User person = new User(uvm.Login, uvm.Password, uvm.Email, ViewBag.Image);
-                    db.Users.Add(person);
-                    this.stat = true;
-                    await db.SaveChangesAsync();
-                    return View("~/Views/Home/RegistrationWindow.cshtml");
+                    string? user = db.Users.First(x => x.LoginOfUser == Login).LoginOfUser;
+                    if (user == null)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
                 }
-                catch(DbUpdateException ex)
+                catch(InvalidOperationException ex)
                 {
-                    this.Page.ClientScript.RegisterStartupScript(this.GetType())
+                    return Ok();
                 }
+
             }
-        }
-        [HttpGet]
-        public async Task<ActionResult> Status()
-        {
-            if (this.stat) return Ok();
-            else return BadRequest();
         }
     }
 }

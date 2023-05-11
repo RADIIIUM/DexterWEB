@@ -22,9 +22,9 @@ namespace DexterWEB.Controllers
             return View();
         }
 
-        public IActionResult GoToReg()
+        public IActionResult RegistrationWindow()
         {
-            return View("RegistrationWindow");
+            return View();
         }
 
         public IActionResult GoToSign()
