@@ -28,7 +28,7 @@ namespace DexterWEB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : Controller
+    public class UsersController : ControllerBase
     {
         public byte[] avatar;
         [HttpPost("createuser")]
@@ -50,23 +50,49 @@ namespace DexterWEB.Controllers
                 return Ok(person);
             }
         }
-        [HttpPost("unloadavatar")]
-        public IActionResult UploadAvatar([FromForm] IFormFile file)
+        [HttpGet("{Login}&{Password}")]
+
+        public async Task<ActionResult> Autorization(string Login, string Password)
         {
-            if (file != null)
+            using (DexterContext db = new DexterContext())
             {
-                byte[] imageData = null;
-                // считываем переданный файл в массив байтов
-                using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+                try
                 {
-                    imageData = binaryReader.ReadBytes(Convert.ToInt32(file.Length));
+                    string? login = db.Users.First(x => x.LoginOfUser == Login).LoginOfUser;
+                    string? password = db.Users.First(x => x.LoginOfUser == Login).PasswordOfUser;
+                    if (login != null)
+                    {
+                        if (password == Password)
+                        {
+                            return Ok();
+                        }
+                        else return BadRequest();
+                    }
+                    else return BadRequest();
                 }
-                // установка массива байтов
-                avatar = imageData;
-                return View("~/Views/Home/RegistrationWindow", model: file);
+                catch(InvalidOperationException ex)
+                {
+                    return BadRequest();
+                }
             }
-            return View("~/Views/Home/RegistrationWindow");
         }
+        //[HttpPost("unloadavatar")]
+        //public IActionResult UploadAvatar([FromForm] IFormFile file)
+        //{
+        //    if (file != null)
+        //    {
+        //        byte[] imageData = null;
+        //        // считываем переданный файл в массив байтов
+        //        using (var binaryReader = new BinaryReader(file.OpenReadStream()))
+        //        {
+        //            imageData = binaryReader.ReadBytes(Convert.ToInt32(file.Length));
+        //        }
+        //        // установка массива байтов
+        //        avatar = imageData;
+        //        return View("~/Views/Home/RegistrationWindow", model: file);
+        //    }
+        //    return View("~/Views/Home/RegistrationWindow");
+        //}
         [HttpGet("{Login}")]
         public async Task<ActionResult> GetUser(string Login)
         {
@@ -84,7 +110,7 @@ namespace DexterWEB.Controllers
                         return BadRequest();
                     }
                 }
-                catch(InvalidOperationException ex)
+                catch (InvalidOperationException ex)
                 {
                     return Ok();
                 }

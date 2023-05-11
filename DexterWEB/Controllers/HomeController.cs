@@ -22,6 +22,11 @@ namespace DexterWEB.Controllers
             return View();
         }
 
+        public IActionResult MainMenu()
+        {
+            return View();
+        }
+
         public IActionResult RegistrationWindow()
         {
             return View();

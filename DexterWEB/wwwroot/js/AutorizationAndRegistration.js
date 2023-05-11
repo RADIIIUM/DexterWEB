@@ -81,6 +81,33 @@ async function CreateUser(Login, Password,
 
 }
 
+async function GetUserForAutorization(Login, Password)
+{
+    const response = await fetch(`https://localhost:44315/api/users/${Login}&${Password}`, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+    });
+    if (response.ok === true) {
+        window.location.href = 'https://localhost:44315/Home/MainMenu';
+    }
+    else
+    {
+        alert("Неверный логин/пароль");
+    }
+}
+
+function Autorization() {
+
+    document.forms["autorizform"].addEventListener("submit", e => {
+        e.preventDefault();
+        const form = document.forms["autorizform"];
+        const Login = form.elements["Login"].value;
+        const Password = form.elements["Password"].value;
+
+        GetUserForAutorization(Login, Password);
+    });
+
+}
 
 function InitialFunction() {
     let el = document.getElementById("ErrorL");

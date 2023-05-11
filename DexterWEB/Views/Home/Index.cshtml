@@ -7,14 +7,14 @@
     <link type="text/css" rel="stylesheet" href="/css/site.css" />
 </head>
 
-<body class="BackgroundDarkGradient">
+<body class="BackgroundDarkGradient" onload="Autorization();">
   <div class="roundimage" >
         <img src="/other/images/Emblema.png" height="180" width="180" />
   </div>
 
   <p> Добро пожаловать! </p>
     <p> <b>Авторизируйтесь </b> </p>
-    <form method="get" id="autorizform" asp-controller="Home" asp-action="Autorization">
+    <form method="get" id="autorizform">
         <div class="row">
         <div class="input-field col s6">
             <input name="Login" type="text" class="validate WhiteStandartTextColor ">
@@ -30,12 +30,13 @@
         </div>
     </div>
 
-        <a  id="signBtn"
-           class="waves-effect waves-light btn ButtonScaleSignUp">Вход</a>
+        <button type="submit"  id="signBtn"
+           class="waves-effect waves-light btn ButtonScaleSignUp">Вход</button>
     </form>
 
     <a class="waves-effect waves-light btn ButtonScaleReg" asp-controller="Home" asp-action="RegistrationWindow">Регистрация</a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="~/js/AutorizationAndRegistration.js"></script>
 </body>
 </html>
