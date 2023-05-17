@@ -7,34 +7,37 @@
     <link type="text/css" rel="stylesheet" href="/css/site.css" />
 </head>
 
-<body class="BackgroundDarkGradient" onload="Autorization();">
-  <div class="roundimage" >
-        <img src="/other/images/Emblema.png" height="180" width="180" />
+<body class="BackgroundLite" onload="Autorization();">
+  <div class="ramka-7 roundimage" >
+
+        <img  src="/other/images/Emblema2.png" height="180" width="180" />
   </div>
 
-  <p> Добро пожаловать! </p>
-    <p> <b>Авторизируйтесь </b> </p>
+  <h1> Добро пожаловать! </h1>
+    <h2> <b>Авторизируйтесь </b> </h2>
     <form method="get" id="autorizform">
         <div class="row">
         <div class="input-field col s6">
-            <input name="Login" type="text" class="validate WhiteStandartTextColor ">
+            <input name="Login" type="text" class="validate ">
             <label class="active" for="Login">Логин</label>
                 <span name="spanlogin" class="helper-text" data-error="Ошибка!" data-success=""></span>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s6">
-            <input name="Password" type="password" class="validate WhiteStandartTextColor ">
+            <input name="Password" type="password" class="validate ">
             <label class="active" for="Password">Пароль</label>
             <span class="helper-text" data-error="Ошибка!" data-success=""></span>
         </div>
     </div>
 
         <button type="submit"  id="signBtn"
-           class="waves-effect waves-light btn ButtonScaleSignUp">Вход</button>
+                class="waves-effect waves-light btn ButtonWhite">
+            Вход
+        </button>
     </form>
 
-    <a class="waves-effect waves-light btn ButtonScaleReg" asp-controller="Home" asp-action="RegistrationWindow">Регистрация</a>
+    <a class="waves-effect waves-light btn ButtonBlack" asp-controller="Home" asp-action="RegistrationWindow">Регистрация</a>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="~/js/AutorizationAndRegistration.js"></script>

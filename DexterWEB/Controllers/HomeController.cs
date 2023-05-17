@@ -26,8 +26,12 @@ namespace DexterWEB.Controllers
         {
             return View();
         }
-
         public IActionResult RegistrationWindow()
+        {
+            return View();
+        }
+
+        public IActionResult UserProfile()
         {
             return View();
         }
@@ -37,6 +41,10 @@ namespace DexterWEB.Controllers
             return View("Index");
         }
 
+        public IActionResult ShopMenu()
+        {
+                return View();
+        }
         [HttpGet]
 
         public async Task<IActionResult> Autorization(string Login, string Password)

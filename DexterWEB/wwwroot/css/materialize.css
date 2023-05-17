@@ -6230,21 +6230,21 @@ textarea.materialize-textarea:focus:not([readonly]) {
           box-shadow: 0 1px 0 0 #26a69a;
 }
 
-input:not([type]):focus:not([readonly]) + label,
-input[type=text]:not(.browser-default):focus:not([readonly]) + label,
-input[type=password]:not(.browser-default):focus:not([readonly]) + label,
-input[type=email]:not(.browser-default):focus:not([readonly]) + label,
-input[type=url]:not(.browser-default):focus:not([readonly]) + label,
-input[type=time]:not(.browser-default):focus:not([readonly]) + label,
-input[type=date]:not(.browser-default):focus:not([readonly]) + label,
-input[type=datetime]:not(.browser-default):focus:not([readonly]) + label,
-input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label,
-input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
-input[type=number]:not(.browser-default):focus:not([readonly]) + label,
-input[type=search]:not(.browser-default):focus:not([readonly]) + label,
-textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #26a69a;
-}
+    input:not([type]):focus:not([readonly]) + label,
+    input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=password]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=url]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=time]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=date]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=datetime]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=datetime-local]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=number]:not(.browser-default):focus:not([readonly]) + label,
+    input[type=search]:not(.browser-default):focus:not([readonly]) + label,
+    textarea.materialize-textarea:focus:not([readonly]) + label {
+        color: #26a69a;
+    }
 
 input:not([type]):focus.valid ~ label,
 input[type=text]:not(.browser-default):focus.valid ~ label,
@@ -7148,7 +7148,7 @@ select.browser-default {
 select {
   background-color: rgba(255, 255, 255, 0.9);
   width: 100%;
-  padding: 5px;
+  padding: 5px; 
   border: 1px solid #f2f2f2;
   border-radius: 2px;
   height: 3rem;

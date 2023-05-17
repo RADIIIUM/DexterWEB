@@ -45,7 +45,15 @@ namespace DexterWEB.Controllers
                     this.avatar = System.IO.File.ReadAllBytes(@"C:\Users\Владелец\source\repos\DexterWEB\DexterWEB\wwwroot\other\images\StandartProfile.png");
                 }
                 User person = new User(uv.Login, uv.Password, uv.Email, this.avatar);
+                PrivilegeUser pr = new PrivilegeUser();
+                pr.LoginUser = uv.Login;
+                pr.IdProvolege = 1;
+                Role r = new Role();
+                r.LoginOfUsers = uv.Login;
+                r.NameOfRole = "Клиент";
                 db.Users.Add(person);
+                db.Roles.Add(r);
+                db.PrivilegeUsers.Add(pr);
                 await db.SaveChangesAsync();
                 return Ok(person);
             }
@@ -64,6 +72,7 @@ namespace DexterWEB.Controllers
                     {
                         if (password == Password)
                         {
+                            Initial.Login = login;
                             return Ok();
                         }
                         else return BadRequest();
@@ -76,23 +85,6 @@ namespace DexterWEB.Controllers
                 }
             }
         }
-        //[HttpPost("unloadavatar")]
-        //public IActionResult UploadAvatar([FromForm] IFormFile file)
-        //{
-        //    if (file != null)
-        //    {
-        //        byte[] imageData = null;
-        //        // считываем переданный файл в массив байтов
-        //        using (var binaryReader = new BinaryReader(file.OpenReadStream()))
-        //        {
-        //            imageData = binaryReader.ReadBytes(Convert.ToInt32(file.Length));
-        //        }
-        //        // установка массива байтов
-        //        avatar = imageData;
-        //        return View("~/Views/Home/RegistrationWindow", model: file);
-        //    }
-        //    return View("~/Views/Home/RegistrationWindow");
-        //}
         [HttpGet("{Login}")]
         public async Task<ActionResult> GetUser(string Login)
         {
